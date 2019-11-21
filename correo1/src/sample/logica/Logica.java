@@ -64,7 +64,7 @@ public class Logica {
            store.connect("imap.googlemail.com", user, pass);
            //store.connect("imap.googlemail.com", "eduardocapinjavafx@gmail.com", "eduardojavafx");
 
-            // folder = (IMAPFolder) store.getFolder("[Gmail]/Spam"); // This doesn't work for other email account
+             folder = (IMAPFolder) store.getFolder("[Gmail]/Spam"); // This doesn't work for other email account
             */
 /*
  for (Folder folder : a) {
@@ -82,20 +82,18 @@ public class Logica {
 
  */
 
-            for (Folder folder : a) {
-                if (!folder.isOpen()) {
-                    folder.open(Folder.READ_WRITE);
-                }
+            Folder folder = (IMAPFolder) store.getFolder("inbox"); // This doesn't work for other email account
+            if (!folder.isOpen()) {
+                folder.open(Folder.READ_WRITE);
+            }
 
 
-                    Message[] messages = folder.getMessages();
-                    Correo correo;
-                    for (int b = 0; b < messages.length; b++) {
-                        correo = new Correo(messages[b]/*,messages[a].getSubject()*/);
-                        listaCorreos.add(correo);
-                    }
-                }
-
+            Message[] messages = folder.getMessages();
+            Correo correo;
+            for (int b = 0; b < messages.length; b++) {
+                correo = new Correo(messages[b]/*,messages[a].getSubject()*/);
+                listaCorreos.add(correo);
+            }
 
         } catch (NoSuchProviderException e) {
             e.printStackTrace();

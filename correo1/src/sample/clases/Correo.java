@@ -46,5 +46,12 @@ public class Correo   {
         return String.valueOf(sub[0]);
     }
 
+    public String verContenidoCorreo(Correo correo){
+
+        return "asdfasdsdadsas";
+
+
+    }
+
 
 }
