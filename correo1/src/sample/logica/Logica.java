@@ -1,15 +1,15 @@
 package sample.logica;
 
+
 import com.sun.mail.imap.IMAPFolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import sample.clases.Correo;
 import sample.clases.CuentaCorreo;
+import sample.clases.TreeItemPropio;
 
 import javax.mail.*;
-import javax.mail.internet.MimeMultipart;
-import java.io.IOException;
 import java.util.Properties;
 
 public class Logica {
@@ -52,49 +52,26 @@ public class Logica {
     }
 
 
-    public void cargarListaCorreos(Store store, Folder[] a) {
+    public void cargarListaCorreos(Store store, Folder a) {
+
         try {
-            /*
-            Properties props = System.getProperties();
-            props.setProperty("mail.store.protocol", "imaps");
 
-            Session session = Session.getDefaultInstance(props, null);
 
-            store = session.getStore("imaps");
-           store.connect("imap.googlemail.com", user, pass);
-           //store.connect("imap.googlemail.com", "eduardocapinjavafx@gmail.com", "eduardojavafx");
-
-             folder = (IMAPFolder) store.getFolder("[Gmail]/Spam"); // This doesn't work for other email account
-            */
-/*
- for (Folder folder : a) {
-                if (!folder.isOpen()) {
-                    folder.open(Folder.READ_WRITE);
-                    if(folder.getType()==Folder.HOLDS_MESSAGES) {
-                        Message[] messages = folder.getMessages();
-                        Correo correo;
-                        for (int b = 0; b < messages.length; b++) {
-                            correo = new Correo(messages[b]/*,messages[a].getSubject());
-            listaCorreos.add(correo);
-        }
-    }
-}
-
- */
-
-            Folder folder = (IMAPFolder) store.getFolder("inbox"); // This doesn't work for other email account
+            Folder folder = (IMAPFolder) store.getFolder(a.getFullName()); // This doesn't work for other email account
             if (!folder.isOpen()) {
+
                 folder.open(Folder.READ_WRITE);
             }
 
+            if(folder.getType()==3) {
 
-            Message[] messages = folder.getMessages();
-            Correo correo;
-            for (int b = 0; b < messages.length; b++) {
-                correo = new Correo(messages[b]/*,messages[a].getSubject()*/);
-                listaCorreos.add(correo);
+                Message[] messages = folder.getMessages();
+                Correo correo;
+                for (int b = 0; b < messages.length; b++) {
+                    correo = new Correo(messages[b]);
+                    listaCorreos.add(correo);
+                }
             }
-
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
         } catch (MessagingException e) {
@@ -115,8 +92,7 @@ public class Logica {
 
             store = session.getStore("imaps");
             store.connect("imap.googlemail.com", user, pass);
-            // CuentaCorreo cuentaCorreo1 = new CuentaCorreo("hola","ado",store);
-            //listaCuentas.add(cuentaCorreo1);
+
             CuentaCorreo cuentaCorreo = new CuentaCorreo(user, pass, store);
             listaCuentas.add(cuentaCorreo);
         } catch (NoSuchProviderException e) {
@@ -147,41 +123,26 @@ public class Logica {
         return a;
     }
 
-    public void verTodasLasCarpetas(Folder[] a, TreeItem rootTreeItem) {
+    public void verTodasLasCarpetas(Folder[] a, TreeItemPropio rootTreeItem,CuentaCorreo cuentaCorreo) {
         try {
-            TreeItem rootItem = null;
+            TreeItemPropio rootItem = null;
             for (Folder itemFolder : a) {
-                //System.out.println(itemFolder.toString());
-                rootItem = new TreeItem(itemFolder.getName());
+
+                rootItem = new TreeItemPropio(itemFolder.getName(),cuentaCorreo,itemFolder); //Con full nombre para poder cargar las carpetas
                 rootTreeItem.getChildren().add(rootItem);
 
-
                 if (itemFolder.getType()==Folder.HOLDS_FOLDERS) {
-                    verTodasLasCarpetas(itemFolder.list(), rootItem);
+                    verTodasLasCarpetas(itemFolder.list(), rootItem,cuentaCorreo);
                 }
             }
-            /*
-            else{
 
-                if (!itemFolder.isOpen())
-                    itemFolder.open(Folder.READ_WRITE);
-                //Si queremos ver los mensajes de cada careta descomentar esto
-
-                Message[] messages = itemFolder.getMessages();
-                    for(Message c : messages) {
-                        rootItem= new TreeItem(c.toString());
-                        rootTreeItem.getChildren().add(rootItem);
-                }
-
-
-            }
-            */
         } catch (MessagingException e) {
             e.printStackTrace();
 
 
         }
     }
+
 
 
 

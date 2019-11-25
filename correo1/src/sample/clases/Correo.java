@@ -1,10 +1,12 @@
 package sample.clases;
 
-import javafx.beans.Observable;
+
+import org.apache.commons.mail.util.MimeMessageParser;
 
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 
 public class Correo   {
@@ -26,16 +28,6 @@ public class Correo   {
         return sub;
     }
 
-    public Object getContenido(){
-        Object obj=null;
-        try {
-            obj = mensaje.getContent();
-        } catch (MessagingException | IOException e) {
-            e.printStackTrace();
-        }
-        return obj;
-    }
-
     public  String getRemitente(){
         Address[] sub=null;
         try {
@@ -46,12 +38,24 @@ public class Correo   {
         return String.valueOf(sub[0]);
     }
 
-    public String verContenidoCorreo(Correo correo){
-
-        return "asdfasdsdadsas";
 
 
+    public Message getMensaje() {
+        return mensaje;
     }
 
+    public void setMensaje(Message mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String readHtmlContent(Correo correo) throws Exception {
+        MimeMessage message=(MimeMessage) correo.getMensaje();
+        return new MimeMessageParser(message).parse().getHtmlContent();
+    }
+
+    public String readPlainContent(Correo correo) throws Exception {
+        MimeMessage message=(MimeMessage) correo.getMensaje();
+        return new MimeMessageParser(message).parse().getPlainContent();
+    }
 
 }

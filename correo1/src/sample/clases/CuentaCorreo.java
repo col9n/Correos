@@ -1,6 +1,5 @@
 package sample.clases;
 
-import sample.logica.Logica;
 
 import javax.mail.Store;
 

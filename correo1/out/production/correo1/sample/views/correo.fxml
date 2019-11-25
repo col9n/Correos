@@ -7,15 +7,15 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.views.ControllerCorreo">
     <children>
         <MenuBar VBox.vgrow="NEVER">
@@ -38,41 +38,37 @@
                 </HBox>
             </items>
         </ToolBar>
-      <SplitPane dividerPositions="0.5" prefHeight="337.0" prefWidth="640.0">
-        <items>
-          <AnchorPane maxWidth="150.0" minHeight="0.0" minWidth="0.0" prefHeight="334.0" prefWidth="200.0">
-               <children>
-                  <TreeView fx:id="treeView" prefHeight="334.0" prefWidth="200.0" />
-               </children>
-            </AnchorPane>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+      <AnchorPane prefHeight="450.0" prefWidth="640.0">
+         <children>
+            <SplitPane dividerPositions="0.2931854199683043" prefHeight="342.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <TableView fx:id="tableViewCorreo" prefHeight="164.0" prefWidth="482.0">
+                  <TreeView fx:id="treeView" prefHeight="340.0" prefWidth="221.0" />
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="400.0" prefWidth="550.0">
+                    <items>
+                        <TableView fx:id="tableViewCorreo" prefHeight="196.0" prefWidth="327.0">
                           <columns>                          
-								<TableColumn prefWidth="165.0" text="Remitente">
+            								<TableColumn maxWidth="323.0" prefWidth="235.0" text="Remitente">
                                         <cellValueFactory>
-                                            <PropertyValueFactory property="remitente"/>
+                                            <PropertyValueFactory property="remitente" />
                                         </cellValueFactory>
                                     </TableColumn>
-                                    <TableColumn prefWidth="165.0" text="Asunto">
+                                    <TableColumn maxWidth="445.0" prefWidth="256.0" text="Asunto">
                                         <cellValueFactory>
-                                            <PropertyValueFactory property="asunto"/>
+                                            <PropertyValueFactory property="asunto" />
                                         </cellValueFactory>
                                     </TableColumn>                 
                           </columns>
                         </TableView>
-                     </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>           
-						  <TextField  fx:id="vewMensaje" prefHeight="164.0" prefWidth="482.0"/>
-                     </children>
-                  </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <WebView fx:id="webView" prefHeight="158.0" prefWidth="448.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
               </items>
             </SplitPane>
-        </items>
-      </SplitPane>
+         </children>
+      </AnchorPane>
     </children>
 </VBox>
