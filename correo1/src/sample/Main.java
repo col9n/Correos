@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Application.setUserAgentStylesheet(Application.STYLESHEET_CASPIAN);
         //Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-        Parent root = FXMLLoader.load(getClass().getResource("views/correo.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("views/escribirCorreo.fxml"));
 
         Scene scene = new Scene(root,800,800);
 
@@ -20,6 +20,8 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    public void setStage(Stage stage) {
+    }
 
     public static void main(String[] args) {
         launch(args);

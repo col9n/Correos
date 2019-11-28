@@ -22,8 +22,8 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Correo">
                     <items>
-                        <MenuItem fx:id="menu" mnemonicParsing="false" text="Nuevo Correo" />
-                        <MenuItem fx:id="menuModificar" mnemonicParsing="false" text="Bandeja" />
+                        <MenuItem fx:id="correo" mnemonicParsing="false" onAction="#nuevoCorreo" text="Nuevo Correo" />
+                        <MenuItem fx:id="cuenta" mnemonicParsing="false" text="Añadir cuenta" />
                     </items>
                 </Menu>
             </menus>

@@ -58,7 +58,7 @@ public class Logica {
 
 
             Folder folder = (IMAPFolder) store.getFolder(a.getFullName()); // This doesn't work for other email account
-            if (!folder.isOpen()) {
+            if (!folder.isOpen() && folder.getType()==3) {
 
                 folder.open(Folder.READ_WRITE);
             }
@@ -141,6 +141,21 @@ public class Logica {
 
 
         }
+    }
+
+    public TreeItem cargarTreeView(){
+        TreeItem nodoPadre = new TreeItem("Lista de cuentas de correo");
+
+        for(int b=0;b<Logica.getInstance().getListaCuentas().size();b++) {
+            nodoPadre.setExpanded(true);
+
+            TreeItemPropio rootItem = new TreeItemPropio(Logica.getInstance().getListaCuentas().get(b).getUser(), null, null);
+            Logica.getInstance().verTodasLasCarpetas( Logica.getInstance().getCarpetasCorreo(Logica.getInstance().getListaCuentas().get(b).getStore()), rootItem, Logica.getInstance().getListaCuentas().get(b));
+            nodoPadre.getChildren().add(rootItem);
+        }
+        return nodoPadre;
+
+
     }
 
 

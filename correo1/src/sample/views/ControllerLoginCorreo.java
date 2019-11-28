@@ -6,9 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ControllerLoginCorreo {
-
+    private Stage stage;
     @FXML
     private TextField user;
 
@@ -27,5 +28,6 @@ public class ControllerLoginCorreo {
 
 
     }
-
+    public void setStage(Stage stage) {
+    }
 }
